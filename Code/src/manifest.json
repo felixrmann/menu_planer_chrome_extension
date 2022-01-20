@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+
+  "name": "Recipe-Exporter",
+  "description": "Export the recipes from websites into the program",
+  "version": "0.1",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.chefkoch.de/rezepte/*"
+      ],
+      "js": [
+        "chefkoch/chefkoch_content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.bettybossi.ch/*/Rezept/ShowRezept/*"
+      ],
+      "js": [
+        "bettybossy/bettybossy_content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.chefkoch.de/rezepte/*",
+        "*://www.bettybossi.ch/*/Rezept/ShowRezept/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "permissions": [
+
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Recipe Exporter"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "chrome-extension-cli": "^0.2.3"
+  }
+}
