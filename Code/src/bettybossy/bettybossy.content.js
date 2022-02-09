@@ -1,6 +1,6 @@
-import {exportRecipeButton} from "../button/export-button";
+let button = document.createElement("button");
+button.innerHTML = "EXPORT";
 
-let button = exportRecipeButton;
 button.addEventListener("click", () => {
     chrome.runtime.sendMessage('bettybossy-click', () => {});
 
@@ -9,4 +9,4 @@ button.addEventListener("click", () => {
 
 document.getElementsByClassName("bb-recipe-buttons")
     .item(0)
-    .insertAdjacentElement("afterend", button);
+    .insertAdjacentElement("beforebegin", button);

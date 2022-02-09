@@ -17,7 +17,9 @@
         "*://www.chefkoch.de/rezepte/*"
       ],
       "js": [
-        "chefkoch/chefkoch_content.js"
+        "thirdParty/jquery-3.6.0.min.js",
+        "chefkoch/chefkoch.extraction.js",
+        "chefkoch/chefkoch.content.js"
       ]
     },
     {
@@ -25,7 +27,7 @@
         "*://www.bettybossi.ch/*/Rezept/ShowRezept/*"
       ],
       "js": [
-        "bettybossy/bettybossy_content.js"
+        "bettybossy/bettybossy.content.js"
       ]
     },
     {

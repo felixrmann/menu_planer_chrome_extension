@@ -1,9 +1,11 @@
-chrome.runtime.onMessage.addListener(function (message) {
+chrome.runtime.onMessage.addListener(function (message, sender) {
 
-    if (message === "chefkoch-click") {
+    console.log(sender)
+
+    if (sender.origin === "https://www.chefkoch.de") {
         console.log("chefkoch");
     }
-    else if (message === "bettybossy-click") {
+    else if (sender.origin === "https://www.bettybossi.ch") {
         console.log("bettybossy");
     }
 
