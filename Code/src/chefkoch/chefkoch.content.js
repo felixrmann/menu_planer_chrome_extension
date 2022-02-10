@@ -4,17 +4,17 @@ button.innerHTML = "EXPORT";
 button.addEventListener("click", () => {
     // extract recipe from dom
     // [x] url
-    //console.log(getUrl())
+    // getUrl()
     // [x] url for image
-    //getImagePath();
+    // getImagePath();
     // [x] name of recipe
-    //getName();
+    // getName();
     // [x] zubereitungszeit
-    //getCookingTime();
+    // getCookingTime();
     // [x] zutaten + angaben
-    //console.log(getTableRows());
+    //getTableRows();
     // [x] portionen
-    //getPortions();
+    // getPortions();
     // [x] schritte (als array)
     // getCookingSteps();
 

@@ -20,8 +20,7 @@ function getUrl() {
  * @returns {string}
  */
 function getImagePath() {
-    const image = document.getElementsByClassName("recipe-header").item(0).querySelectorAll("amp-img").item(0);
-    return image.getAttribute("src");
+    return $("img.i-amphtml-fill-content").first().attr("src");
 }
 
 /**
@@ -29,9 +28,7 @@ function getImagePath() {
  * @returns {string}
  */
 function getName() {
-    const h1Header = document.getElementsByClassName("recipe-header").item(0).querySelectorAll("h1").item(0);
-    console.log(h1Header.innerText);
-    return h1Header.innerText;
+    return $("article.recipe-header").children("div").children("h1").text();
 }
 
 /**
@@ -56,14 +53,41 @@ function getCookingTime() {
  * @returns {{"amount", "ingredient"}[]}
  */
 function getTableRows() {
-    let ingredients = [];
-    const trArray = document.getElementsByClassName("ingredients table-header").item(0).tBodies[0].rows;
-    for (let i = 0; i < trArray.length; i++) {
-        const amountDiv = trArray.item(i).getElementsByClassName("td-left");
-        const ingredientDiv = trArray.item(i).getElementsByClassName("td-right");
-        ingredients.push({"amount": amountDiv.item(0).innerText, "ingredient": ingredientDiv.item(0).innerText});
-    }
-    return ingredients;
+    let ingredientTables = [];
+
+    const tables = $(".ingredients");
+    jQuery.each(tables, function (index, element) {
+        const thead = element.querySelector("thead");
+        let title = undefined;
+        if (thead !== null) {
+            title = thead.querySelector("h3").innerText;
+        }
+
+        const trows = element.querySelector("tbody").rows;
+        let ingredients = [];
+        for (let i = 0; i < trows.length; i++) {
+            const amountDiv = trows.item(i).getElementsByClassName("td-left");
+            const ingredientDiv = trows.item(i).getElementsByClassName("td-right");
+            ingredients.push({"amount": amountDiv.item(0).innerText, "ingredient": ingredientDiv.item(0).innerText});
+        }
+
+        ingredientTables.push({
+           "title": title,
+           "ingredients": ingredients
+        });
+    });
+
+    return ingredientTables;
+}
+
+function extractData(element) {
+    element.children("tbody").children("tr").each(function (index, element) {
+        const amount = element.children("td-left").text();
+        const ingredient = element.children("td-right").text();
+
+        console.log(amount);
+        console.log(ingredient);
+    });
 }
 
 /**
@@ -71,8 +95,7 @@ function getTableRows() {
  * @returns {string}
  */
 function getPortions() {
-    const portionInput = document.getElementsByClassName("ds-input").item(0);
-    return portionInput.getAttribute("value");
+    return $(".ds-input").first().attr("value");
 }
 
 /**
