@@ -1,30 +1,28 @@
-let button = document.createElement("button");
-button.innerHTML = "EXPORT";
+let button = document.createElement('button');
+button.innerHTML = 'EXPORT';
 
-button.addEventListener("click", () => {
-    // extract recipe from dom
-    // [x] url
-    // getUrl()
-    // [x] url for image
-    // getImagePath();
-    // [x] name of recipe
-    // getName();
-    // [x] zubereitungszeit
-    // getCookingTime();
-    // [x] zutaten + angaben
-    //getTableRows();
-    // [x] portionen
-    // getPortions();
-    // [x] schritte (als array)
-    // getCookingSteps();
+button.addEventListener('click', () => {
+
+    const extractedRecipe = {
+        'name': getRecipeName(),
+        'url': getUrl(),
+        'image': getImagePath(),
+        'portions': getPortions(),
+        'time': getCookingTime(),
+        'ingredients': getIngredients(),
+        'steps': getCookingSteps()
+    }
+
+    console.log(extractedRecipe);
 
     chrome.runtime.sendMessage('chefkoch-click', () => {});
 });
 
-// remove unnecessary components from the chefkoch.de website
-// TODO rework
-document.getElementsByClassName("pi-cont")
-    .item(0)
-    .insertAdjacentElement("beforebegin", button);
+/**
+ * change the dom of https://chefkoch.de the dom
+ */
 
-// document.getElementsByClassName("bring-teaser").item(0).remove();
+injectButton(button);
+
+removeBringTeaser();
+removeAds();

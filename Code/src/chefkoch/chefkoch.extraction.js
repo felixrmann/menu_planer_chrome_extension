@@ -12,7 +12,7 @@ function getUrl() {
     const pathname = window.location.pathname;
     const search = window.location.search;
 
-    return protocol + "//" + host + pathname + search;
+    return protocol + '//' + host + pathname + search;
 }
 
 /**
@@ -20,15 +20,15 @@ function getUrl() {
  * @returns {string}
  */
 function getImagePath() {
-    return $("img.i-amphtml-fill-content").first().attr("src");
+    return $('img.i-amphtml-fill-content').first().attr('src');
 }
 
 /**
  * Returns the Name of the recipe
  * @returns {string}
  */
-function getName() {
-    return $("article.recipe-header").children("div").children("h1").text();
+function getRecipeName() {
+    return $('article.recipe-header').children('div').children('h1').text();
 }
 
 /**
@@ -36,8 +36,8 @@ function getName() {
  * @returns {number}
  */
 function getCookingTime() {
-    const cookingTimeText = $("span:contains('Gesamtzeit')").text();
-    const cookingTime = cookingTimeText.match(/\d/g).join("");
+    const cookingTimeText = $('span:contains("Gesamtzeit")').text();
+    const cookingTime = cookingTimeText.match(/\d/g).join('');
 
     if (cookingTime.length > 2) {
         const hours = cookingTime.substring(0, cookingTime.length - 2);
@@ -50,44 +50,34 @@ function getCookingTime() {
 
 /**
  * Returns the recipe ingredients from the table
- * @returns {{"amount", "ingredient"}[]}
+ * @returns {{'amount', 'ingredient'}[]}
  */
-function getTableRows() {
+function getIngredients() {
     let ingredientTables = [];
 
-    const tables = $(".ingredients");
+    const tables = $('.ingredients');
     jQuery.each(tables, function (index, element) {
-        const thead = element.querySelector("thead");
+        const thead = element.querySelector('thead');
         let title = undefined;
         if (thead !== null) {
-            title = thead.querySelector("h3").innerText;
+            title = thead.querySelector('h3').innerText;
         }
 
-        const trows = element.querySelector("tbody").rows;
+        const trows = element.querySelector('tbody').rows;
         let ingredients = [];
         for (let i = 0; i < trows.length; i++) {
-            const amountDiv = trows.item(i).getElementsByClassName("td-left");
-            const ingredientDiv = trows.item(i).getElementsByClassName("td-right");
-            ingredients.push({"amount": amountDiv.item(0).innerText, "ingredient": ingredientDiv.item(0).innerText});
+            const amountDiv = trows.item(i).getElementsByClassName('td-left');
+            const ingredientDiv = trows.item(i).getElementsByClassName('td-right');
+            ingredients.push({'amount': amountDiv.item(0).innerText, 'ingredient': ingredientDiv.item(0).innerText});
         }
 
         ingredientTables.push({
-           "title": title,
-           "ingredients": ingredients
+           'title': title,
+           'ingredients': ingredients
         });
     });
 
     return ingredientTables;
-}
-
-function extractData(element) {
-    element.children("tbody").children("tr").each(function (index, element) {
-        const amount = element.children("td-left").text();
-        const ingredient = element.children("td-right").text();
-
-        console.log(amount);
-        console.log(ingredient);
-    });
 }
 
 /**
@@ -95,7 +85,7 @@ function extractData(element) {
  * @returns {string}
  */
 function getPortions() {
-    return $(".ds-input").first().attr("value");
+    return $('.ds-input').first().attr('value');
 }
 
 /**
@@ -103,37 +93,9 @@ function getPortions() {
  * @returns {string[]}
  */
 function getCookingSteps() {
-    const recipeText = $("article:contains('Zubereitung')").find('div').first().text();
-    let stepArray = recipeText.slice(5).split("\n");
+    const recipeText = $('article:contains("Zubereitung")').find('div').first().text();
+    let stepArray = recipeText.slice(5).split('\n');
     return stepArray.filter(function (value) {
         return value.length > 0;
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

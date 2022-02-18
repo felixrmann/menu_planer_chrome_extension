@@ -19,6 +19,7 @@
       "js": [
         "thirdParty/jquery-3.6.0.min.js",
         "chefkoch/chefkoch.extraction.js",
+        "chefkoch/chefkoch.visual.js",
         "chefkoch/chefkoch.content.js"
       ]
     },
